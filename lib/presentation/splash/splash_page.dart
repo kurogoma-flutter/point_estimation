@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../sample/sample_home_page.dart';
+import '../home/home_page.dart';
 
 class SplashPage extends HookConsumerWidget {
   const SplashPage({super.key});
@@ -13,6 +13,6 @@ class SplashPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // splash起動処理等記述
 
-    return const SampleHomePage();
+    return const HomePage();
   }
 }

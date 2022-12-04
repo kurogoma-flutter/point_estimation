@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:layer_architecture_template/presentation/error/error_page.dart';
+import 'package:layer_architecture_template/presentation/home/home_page.dart';
 
-import '../../presentation/sample/sample_home_page.dart';
 import '../../presentation/sample_detail/sample_detail_page.dart';
 import '../../presentation/splash/splash_page.dart';
 import 'slide_transitions_builder.dart';
@@ -31,11 +31,11 @@ final router = GoRouter(
 
     /// アプリホーム
     GoRoute(
-        name: SampleHomePage.routeName,
-        path: SampleHomePage.routePath,
+        name: HomePage.routeName,
+        path: HomePage.routePath,
         pageBuilder: (context, state) => NoTransitionPage(
               key: state.pageKey,
-              child: const SampleHomePage(),
+              child: const HomePage(),
             ),
         routes: [
           // ネストかつアニメーション込みの画面遷移
