@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:layer_architecture_template/presentation/home/home_enum.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   static const String routeName = 'home';
   static const String routePath = '/home';
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PointOptions selectedOption = PointOptions.fibonacci;
+
+  // 数列のサンプルを表示するWidget
+  String sampleText() {
+    switch (selectedOption) {
+      case PointOptions.fibonacci:
+        return '1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...';
+      case PointOptions.increment:
+        return '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...';
+      case PointOptions.multipleOfTwo:
+        return '1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, ...';
+      case PointOptions.custom:
+        return '1~100までの数値を自由に選択できます';
+      default:
+        return '';
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     // 幅のメディアクエリ対応（Form）
     double formWidth(BuildContext context) {
       final deviceType = getDeviceType(MediaQuery.of(context).size);
-
       switch (deviceType) {
         case DeviceScreenType.desktop:
           return 0.3;
@@ -88,33 +111,64 @@ class HomePage extends StatelessWidget {
             const Text(
               'ポイントタイプを選択してください',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: FontWeight.w300,
                 color: Colors.white,
               ),
             ),
             // タイプを選択するRadioButton（横並び）
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
+              padding: const EdgeInsets.symmetric(vertical: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  _RadioButton(
-                    label: 'フィボナッチ',
-                    isSelected: false,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedOption = PointOptions.fibonacci;
+                      });
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: _RadioButton(
+                      label: 'フィボナッチ',
+                      isSelected: selectedOption == PointOptions.fibonacci,
+                    ),
                   ),
-                  _RadioButton(
-                    label: '1 ~ 100',
-                    isSelected: false,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedOption = PointOptions.increment;
+                      });
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: _RadioButton(
+                      label: 'インクリメント',
+                      isSelected: selectedOption == PointOptions.increment,
+                    ),
                   ),
-                  _RadioButton(
-                    label: 'サンプル',
-                    isSelected: true,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedOption = PointOptions.multipleOfTwo;
+                      });
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: _RadioButton(
+                      label: '2の階乗',
+                      isSelected: selectedOption == PointOptions.multipleOfTwo,
+                    ),
                   ),
-                  SizedBox(width: 16),
-                  _RadioButton(
-                    label: 'T-サンプル',
-                    isSelected: false,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedOption = PointOptions.custom;
+                      });
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: _RadioButton(
+                      label: 'カスタム',
+                      isSelected: selectedOption == PointOptions.custom,
+                    ),
                   ),
                 ],
               ),
@@ -139,6 +193,16 @@ class HomePage extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w300,
                   ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Text(
+                sampleText(),
+                style: const TextStyle(
+                  fontSize: 16,
                 ),
               ),
             ),
@@ -189,27 +253,24 @@ class _SelectedRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.black54,
-            width: 0.5,
-          ),
+    return Container(
+      width: 24,
+      height: 24,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Colors.black54,
+          width: 0.5,
         ),
-        child: Center(
-          child: Container(
-            width: 18,
-            height: 18,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 54, 57, 241),
-              borderRadius: BorderRadius.circular(9),
-            ),
+      ),
+      child: Center(
+        child: Container(
+          width: 18,
+          height: 18,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 54, 57, 241),
+            borderRadius: BorderRadius.circular(9),
           ),
         ),
       ),
