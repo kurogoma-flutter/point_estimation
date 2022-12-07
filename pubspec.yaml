@@ -23,6 +23,7 @@ dependencies:
   logger: ^1.1.0
   flutter_native_splash: ^2.2.10+1
   url_launcher: ^6.1.6
+  responsive_builder: ^0.4.3
 
 dev_dependencies:
   flutter_test:

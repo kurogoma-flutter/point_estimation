@@ -1,25 +1,38 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "point_estimation",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "point_estimation (profile mode)",
+            "name": "開発環境 develop ",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--web-port=8080",
+                "--web-renderer=html",
+                "--dart-define",
+                "FLAVOR_DEV=develop"
+            ]
         },
         {
-            "name": "point_estimation (release mode)",
+            "name": "検証環境 staging ",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "args": [
+                "--web-port=8081",
+                "--web-renderer=html",
+                "--dart-define",
+                "FLAVOR_DEV=staging"
+            ]
+        },
+        {
+            "name": "本番環境 - production ",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--web-port=8082",
+                "--web-renderer=html",
+                "--dart-define",
+                "FLAVOR_PROD=production"
+            ]
         }
     ]
 }
