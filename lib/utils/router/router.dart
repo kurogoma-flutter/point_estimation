@@ -47,7 +47,10 @@ final router = GoRouter(
             AppRouter().getQueryParams(url: state.location.toString());
         return NoTransitionPage(
           key: state.pageKey,
-          child: RoomPage(roomId: params['roomId']!),
+          child: RoomPage(
+            roomId: params['roomId']!,
+            pointType: params['pointType']!,
+          ),
         );
       },
     ),

@@ -186,7 +186,10 @@ class _HomePageState extends State<HomePage> {
                   AppRouter().goNamed(
                     context,
                     RoomPage.routeName,
-                    params: {'roomId': '1234'},
+                    params: {
+                      'roomId': '1234',
+                      'pointType': 'fibonacci',
+                    },
                   );
                 },
                 style: ElevatedButton.styleFrom(

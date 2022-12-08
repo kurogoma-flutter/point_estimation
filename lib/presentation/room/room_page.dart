@@ -7,12 +7,14 @@ class RoomPage extends StatelessWidget {
   const RoomPage({
     super.key,
     required this.roomId,
+    required this.pointType,
   });
 
   static const String routeName = 'room';
   static const String routePath = '/room';
 
   final String roomId;
+  final String pointType;
 
   @override
   Widget build(BuildContext context) {
