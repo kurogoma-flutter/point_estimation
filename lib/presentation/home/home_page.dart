@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:layer_architecture_template/presentation/home/home_enum.dart';
+import 'package:layer_architecture_template/utils/router/app_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+
+import '../room/room_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,11 +22,11 @@ class _HomePageState extends State<HomePage> {
   String sampleText() {
     switch (selectedOption) {
       case PointOptions.fibonacci:
-        return '1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...';
+        return '0.5, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...';
       case PointOptions.increment:
-        return '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...';
+        return '0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...';
       case PointOptions.multipleOfTwo:
-        return '1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, ...';
+        return '0.5, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, ...';
       case PointOptions.custom:
         return '1~100までの数値を自由に選択できます';
       default:
@@ -179,7 +182,13 @@ class _HomePageState extends State<HomePage> {
               width: screenSize.width * buttonWidth(context),
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  AppRouter().goNamed(
+                    context,
+                    RoomPage.routeName,
+                    params: {'roomId': '1234'},
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(

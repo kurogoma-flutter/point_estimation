@@ -1,12 +1,11 @@
 // ボトムナビゲーションを非表示にしたいルートパスを指定
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:layer_architecture_template/presentation/error/error_page.dart';
 import 'package:layer_architecture_template/presentation/home/home_page.dart';
+import 'package:layer_architecture_template/presentation/room/room_page.dart';
+import 'package:layer_architecture_template/utils/router/app_router.dart';
 
-import '../../presentation/sample_detail/sample_detail_page.dart';
 import '../../presentation/splash/splash_page.dart';
-import 'slide_transitions_builder.dart';
 
 const denyShowBNBList = [
   SplashPage.routePath,
@@ -31,35 +30,26 @@ final router = GoRouter(
 
     /// アプリホーム
     GoRoute(
-        name: HomePage.routeName,
-        path: HomePage.routePath,
-        pageBuilder: (context, state) => NoTransitionPage(
-              key: state.pageKey,
-              child: const HomePage(),
-            ),
-        routes: [
-          // ネストかつアニメーション込みの画面遷移
-          GoRoute(
-            name: SampleDetailPage.routeName,
-            path: SampleDetailPage.routePath,
-            pageBuilder: (context, state) => CustomTransitionPage(
-              key: state.pageKey,
-              child: const SampleDetailPage(),
-              transitionDuration: const Duration(milliseconds: 300),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SlideTransitionBuilder().buildTransitions(
-                  MaterialPageRoute(
-                    builder: (context) => const SampleDetailPage(),
-                  ),
-                  context,
-                  animation,
-                  secondaryAnimation,
-                  child,
-                );
-              },
-            ),
-          ),
-        ]),
+      name: HomePage.routeName,
+      path: HomePage.routePath,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const HomePage(),
+      ),
+    ),
+    // ルーム画面
+    GoRoute(
+      name: RoomPage.routeName,
+      path: RoomPage.routePath,
+      pageBuilder: (context, state) {
+        // パスパラメータを取得
+        final params =
+            AppRouter().getQueryParams(url: state.location.toString());
+        return NoTransitionPage(
+          key: state.pageKey,
+          child: RoomPage(roomId: params['roomId']!),
+        );
+      },
+    ),
   ],
 );

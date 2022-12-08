@@ -27,7 +27,7 @@ class AppRouter {
   void pop(BuildContext context) => context.pop();
 
   // QueryParamsを取得
-  Map<String, String> getQueryParams(String url) {
+  Map<String, String> getQueryParams({required String url}) {
     final uri = Uri.parse(url);
     return uri.queryParameters;
   }
