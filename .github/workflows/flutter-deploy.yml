@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     # Flutter Build
-    - uses: subosito/flutter-action@v2
+    - name: Flutter Build
+      uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.3.6'
         channel: 'stable'
@@ -20,13 +21,15 @@ jobs:
     - run: flutter pub get
     - run: flutter build web --web-renderer html
 
-    - uses: FirebaseExtended/action-hosting-deploy@v0
+    - name: Preview Hosting
+      uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: "${{ secrets.GITHUB_TOKEN }}"
         firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_POINT_ESTIMATION }}"
         expires: 10d
         projectId: point-estimation
 
+    - name: Firebase Deploy
       uses: FirebaseExtended/action-hosting-deploy@v0
       if: github.ref == 'refs/heads/release'
       with:
