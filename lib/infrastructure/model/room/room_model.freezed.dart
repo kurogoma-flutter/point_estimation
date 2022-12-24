@@ -20,9 +20,12 @@ RoomModel _$RoomModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RoomModel {
-  String get roomId => throw _privateConstructorUsedError;
-  String get pointType => throw _privateConstructorUsedError;
-  List<String> get userIds => throw _privateConstructorUsedError;
+  String get roomId => throw _privateConstructorUsedError; // 識別用ID
+  String get ownerId => throw _privateConstructorUsedError; // 作成者ID
+  String get pointType => throw _privateConstructorUsedError; // ポイントタイプ
+  List<String> get userList => throw _privateConstructorUsedError; // 参加者一覧
+  @CreatedAtField()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +38,12 @@ abstract class $RoomModelCopyWith<$Res> {
   factory $RoomModelCopyWith(RoomModel value, $Res Function(RoomModel) then) =
       _$RoomModelCopyWithImpl<$Res, RoomModel>;
   @useResult
-  $Res call({String roomId, String pointType, List<String> userIds});
+  $Res call(
+      {String roomId,
+      String ownerId,
+      String pointType,
+      List<String> userList,
+      @CreatedAtField() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -52,22 +60,32 @@ class _$RoomModelCopyWithImpl<$Res, $Val extends RoomModel>
   @override
   $Res call({
     Object? roomId = null,
+    Object? ownerId = null,
     Object? pointType = null,
-    Object? userIds = null,
+    Object? userList = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
               as String,
+      ownerId: null == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
       pointType: null == pointType
           ? _value.pointType
           : pointType // ignore: cast_nullable_to_non_nullable
               as String,
-      userIds: null == userIds
-          ? _value.userIds
-          : userIds // ignore: cast_nullable_to_non_nullable
+      userList: null == userList
+          ? _value.userList
+          : userList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -79,7 +97,12 @@ abstract class _$$_RoomModelCopyWith<$Res> implements $RoomModelCopyWith<$Res> {
       __$$_RoomModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String roomId, String pointType, List<String> userIds});
+  $Res call(
+      {String roomId,
+      String ownerId,
+      String pointType,
+      List<String> userList,
+      @CreatedAtField() DateTime? createdAt});
 }
 
 /// @nodoc
@@ -94,22 +117,32 @@ class __$$_RoomModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? roomId = null,
+    Object? ownerId = null,
     Object? pointType = null,
-    Object? userIds = null,
+    Object? userList = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$_RoomModel(
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
               as String,
+      ownerId: null == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as String,
       pointType: null == pointType
           ? _value.pointType
           : pointType // ignore: cast_nullable_to_non_nullable
               as String,
-      userIds: null == userIds
-          ? _value._userIds
-          : userIds // ignore: cast_nullable_to_non_nullable
+      userList: null == userList
+          ? _value._userList
+          : userList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -119,27 +152,40 @@ class __$$_RoomModelCopyWithImpl<$Res>
 class _$_RoomModel implements _RoomModel {
   const _$_RoomModel(
       {required this.roomId,
+      required this.ownerId,
       required this.pointType,
-      required final List<String> userIds})
-      : _userIds = userIds;
+      required final List<String> userList,
+      @CreatedAtField() this.createdAt})
+      : _userList = userList;
 
   factory _$_RoomModel.fromJson(Map<String, dynamic> json) =>
       _$$_RoomModelFromJson(json);
 
   @override
   final String roomId;
+// 識別用ID
+  @override
+  final String ownerId;
+// 作成者ID
   @override
   final String pointType;
-  final List<String> _userIds;
+// ポイントタイプ
+  final List<String> _userList;
+// ポイントタイプ
   @override
-  List<String> get userIds {
+  List<String> get userList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userIds);
+    return EqualUnmodifiableListView(_userList);
   }
+
+// 参加者一覧
+  @override
+  @CreatedAtField()
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'RoomModel(roomId: $roomId, pointType: $pointType, userIds: $userIds)';
+    return 'RoomModel(roomId: $roomId, ownerId: $ownerId, pointType: $pointType, userList: $userList, createdAt: $createdAt)';
   }
 
   @override
@@ -148,15 +194,18 @@ class _$_RoomModel implements _RoomModel {
         (other.runtimeType == runtimeType &&
             other is _$_RoomModel &&
             (identical(other.roomId, roomId) || other.roomId == roomId) &&
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.pointType, pointType) ||
                 other.pointType == pointType) &&
-            const DeepCollectionEquality().equals(other._userIds, _userIds));
+            const DeepCollectionEquality().equals(other._userList, _userList) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, roomId, pointType,
-      const DeepCollectionEquality().hash(_userIds));
+  int get hashCode => Object.hash(runtimeType, roomId, ownerId, pointType,
+      const DeepCollectionEquality().hash(_userList), createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -175,18 +224,25 @@ class _$_RoomModel implements _RoomModel {
 abstract class _RoomModel implements RoomModel {
   const factory _RoomModel(
       {required final String roomId,
+      required final String ownerId,
       required final String pointType,
-      required final List<String> userIds}) = _$_RoomModel;
+      required final List<String> userList,
+      @CreatedAtField() final DateTime? createdAt}) = _$_RoomModel;
 
   factory _RoomModel.fromJson(Map<String, dynamic> json) =
       _$_RoomModel.fromJson;
 
   @override
   String get roomId;
-  @override
+  @override // 識別用ID
+  String get ownerId;
+  @override // 作成者ID
   String get pointType;
-  @override
-  List<String> get userIds;
+  @override // ポイントタイプ
+  List<String> get userList;
+  @override // 参加者一覧
+  @CreatedAtField()
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_RoomModelCopyWith<_$_RoomModel> get copyWith =>

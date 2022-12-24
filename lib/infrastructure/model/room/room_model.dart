@@ -1,40 +1,36 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:layer_architecture_template/infrastructure/model/firestore_timestamp.dart';
 
 part 'room_model.freezed.dart';
 
+part 'room_model.g.dart';
+
 @freezed
-class RoomModel with _$RoomModel {
+abstract class RoomModel with _$RoomModel {
   const factory RoomModel({
-    required String roomId,
-    required String pointType,
-    required List<String> userIds,
+    required String roomId, // 識別用ID
+    required String ownerId, // 作成者ID
+    required String pointType, // ポイントタイプ
+    required List<String> userList, // 参加者一覧
+    @CreatedAtField() DateTime? createdAt, // 作成日時
   }) = _RoomModel;
 
   factory RoomModel.fromJson(Map<String, dynamic> json) =>
       _$RoomModelFromJson(json);
 
-  factory RoomModel.fromMap(Map<String, dynamic> map) {
-    return RoomModel(
-      roomId: map['roomId'] as String,
-      pointType: map['pointType'] as String,
-      userIds: List<String>.from(map['userIds'] as List<dynamic>),
-    );
-  }
+  factory RoomModel.initialData() => RoomModel(
+        roomId: '',
+        ownerId: '',
+        pointType: '',
+        userList: [],
+        createdAt: DateTime.now(),
+      );
 
-  Map<String, dynamic> toMap() {
-    return {
-      'roomId': roomId,
-      'pointType': pointType,
-      'userIds': userIds,
-    };
-  }
-
-  // fromSnapshot
-  factory RoomModel.fromSnapshot(Map<String, dynamic> snapshot) {
-    return RoomModel(
-      roomId: snapshot['roomId'] as String,
-      pointType: snapshot['pointType'] as String,
-      userIds: List<String>.from(snapshot['userIds'] as List<dynamic>),
-    );
-  }
+  factory RoomModel.fromMap(Map<String, dynamic> data) => RoomModel(
+        roomId: data['roomId'],
+        ownerId: data['ownerId'],
+        pointType: data['pointType'],
+        userList: data['userList'],
+        createdAt: data['createdAt'],
+      );
 }
