@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:layer_architecture_template/presentation/home/home_enum.dart';
+import 'package:layer_architecture_template/enum/point_type.dart';
 import 'package:layer_architecture_template/utils/router/app_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -16,18 +16,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PointOptions selectedOption = PointOptions.fibonacci;
+  PointType selectedOption = PointType.fibonacci;
 
   // 数列のサンプルを表示するWidget
   String sampleText() {
     switch (selectedOption) {
-      case PointOptions.fibonacci:
+      case PointType.fibonacci:
         return '0.5, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...';
-      case PointOptions.increment:
+      case PointType.increment:
         return '0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...';
-      case PointOptions.multipleOfTwo:
+      case PointType.multipleOfTwo:
         return '0.5, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, ...';
-      case PointOptions.custom:
+      case PointType.custom:
         return '1~100までの数値を自由に選択できます';
       default:
         return '';
@@ -128,49 +128,49 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedOption = PointOptions.fibonacci;
+                        selectedOption = PointType.fibonacci;
                       });
                     },
                     behavior: HitTestBehavior.opaque,
                     child: _RadioButton(
                       label: 'フィボナッチ',
-                      isSelected: selectedOption == PointOptions.fibonacci,
+                      isSelected: selectedOption == PointType.fibonacci,
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedOption = PointOptions.increment;
+                        selectedOption = PointType.increment;
                       });
                     },
                     behavior: HitTestBehavior.opaque,
                     child: _RadioButton(
                       label: 'インクリメント',
-                      isSelected: selectedOption == PointOptions.increment,
+                      isSelected: selectedOption == PointType.increment,
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedOption = PointOptions.multipleOfTwo;
+                        selectedOption = PointType.multipleOfTwo;
                       });
                     },
                     behavior: HitTestBehavior.opaque,
                     child: _RadioButton(
                       label: '2の階乗',
-                      isSelected: selectedOption == PointOptions.multipleOfTwo,
+                      isSelected: selectedOption == PointType.multipleOfTwo,
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedOption = PointOptions.custom;
+                        selectedOption = PointType.custom;
                       });
                     },
                     behavior: HitTestBehavior.opaque,
                     child: _RadioButton(
                       label: 'カスタム',
-                      isSelected: selectedOption == PointOptions.custom,
+                      isSelected: selectedOption == PointType.custom,
                     ),
                   ),
                 ],

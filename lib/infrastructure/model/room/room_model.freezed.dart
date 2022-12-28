@@ -22,7 +22,7 @@ RoomModel _$RoomModelFromJson(Map<String, dynamic> json) {
 mixin _$RoomModel {
   String get roomId => throw _privateConstructorUsedError; // 識別用ID
   String get ownerId => throw _privateConstructorUsedError; // 作成者ID
-  String get pointType => throw _privateConstructorUsedError; // ポイントタイプ
+  PointType get pointType => throw _privateConstructorUsedError; // ポイントタイプ
   List<String> get userList => throw _privateConstructorUsedError; // 参加者一覧
   @CreatedAtField()
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $RoomModelCopyWith<$Res> {
   $Res call(
       {String roomId,
       String ownerId,
-      String pointType,
+      PointType pointType,
       List<String> userList,
       @CreatedAtField() DateTime? createdAt});
 }
@@ -77,7 +77,7 @@ class _$RoomModelCopyWithImpl<$Res, $Val extends RoomModel>
       pointType: null == pointType
           ? _value.pointType
           : pointType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PointType,
       userList: null == userList
           ? _value.userList
           : userList // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$_RoomModelCopyWith<$Res> implements $RoomModelCopyWith<$Res> {
   $Res call(
       {String roomId,
       String ownerId,
-      String pointType,
+      PointType pointType,
       List<String> userList,
       @CreatedAtField() DateTime? createdAt});
 }
@@ -134,7 +134,7 @@ class __$$_RoomModelCopyWithImpl<$Res>
       pointType: null == pointType
           ? _value.pointType
           : pointType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PointType,
       userList: null == userList
           ? _value._userList
           : userList // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class _$_RoomModel implements _RoomModel {
   final String ownerId;
 // 作成者ID
   @override
-  final String pointType;
+  final PointType pointType;
 // ポイントタイプ
   final List<String> _userList;
 // ポイントタイプ
@@ -225,7 +225,7 @@ abstract class _RoomModel implements RoomModel {
   const factory _RoomModel(
       {required final String roomId,
       required final String ownerId,
-      required final String pointType,
+      required final PointType pointType,
       required final List<String> userList,
       @CreatedAtField() final DateTime? createdAt}) = _$_RoomModel;
 
@@ -237,7 +237,7 @@ abstract class _RoomModel implements RoomModel {
   @override // 識別用ID
   String get ownerId;
   @override // 作成者ID
-  String get pointType;
+  PointType get pointType;
   @override // ポイントタイプ
   List<String> get userList;
   @override // 参加者一覧

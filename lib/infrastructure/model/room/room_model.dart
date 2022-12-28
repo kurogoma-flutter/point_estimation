@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:layer_architecture_template/enum/point_type.dart';
 import 'package:layer_architecture_template/infrastructure/model/firestore_timestamp.dart';
 
 part 'room_model.freezed.dart';
@@ -10,7 +11,7 @@ abstract class RoomModel with _$RoomModel {
   const factory RoomModel({
     required String roomId, // 識別用ID
     required String ownerId, // 作成者ID
-    required String pointType, // ポイントタイプ
+    required PointType pointType, // ポイントタイプ
     required List<String> userList, // 参加者一覧
     @CreatedAtField() DateTime? createdAt, // 作成日時
   }) = _RoomModel;
@@ -21,7 +22,7 @@ abstract class RoomModel with _$RoomModel {
   factory RoomModel.initialData() => RoomModel(
         roomId: '',
         ownerId: '',
-        pointType: '',
+        pointType: PointType.fibonacci,
         userList: [],
         createdAt: DateTime.now(),
       );
@@ -29,7 +30,7 @@ abstract class RoomModel with _$RoomModel {
   factory RoomModel.fromMap(Map<String, dynamic> data) => RoomModel(
         roomId: data['roomId'],
         ownerId: data['ownerId'],
-        pointType: data['pointType'],
+        pointType: pointTypeFromString(data['pointType']),
         userList: data['userList'],
         createdAt: data['createdAt'],
       );
