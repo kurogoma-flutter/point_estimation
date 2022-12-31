@@ -182,8 +182,8 @@ class _HomePageState extends State<HomePage> {
               width: screenSize.width * buttonWidth(context),
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  AppRouter().goNamed(
+                onPressed: () async {
+                  final navigator = AppRouter().goNamed(
                     context,
                     RoomPage.routeName,
                     params: {
