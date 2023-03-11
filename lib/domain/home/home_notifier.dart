@@ -15,17 +15,4 @@ class HomeNotifier extends StateNotifier<HomeState> {
   }) : super(const HomeState());
 
   final HomeService homeService;
-
-  // Future<void> init() async {
-  //   // 通常のFutureのサンプル
-  //   final homeList = await homeService.fetchHomeModelList();
-  //   state = state.copyWith(
-  //     homeList: homeList,
-  //   );
-
-  //   // AsyncValueのサンプル
-  //   final futureHomeModelList = await homeService.fetchHomeModelList();
-  //   state =
-  //       state.copyWith(futureHomeList: AsyncValue.data(futureHomeModelList));
-  // }
 }
